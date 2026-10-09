@@ -40,10 +40,7 @@ function draw() {
 function drawDoor(issecond){
   fill(bodycolor.r, bodycolor.g, bodycolor.b); //body
   box(100*doorwidth,300*doorheight,10);
-  //resetMatrix();
 
-  //fill(100, 100, 100);
-  //circle(100,100,50);
 
   fill(handlecolor.r, handlecolor.g, handlecolor.b); //hinges
   for(i = 0; i < numofhinges; i++){
@@ -198,4 +195,8 @@ function generateDoor(){
 function setSeed(){
   newSeed = document.getElementById("seedtext").value;
   randomSeed(newSeed);
+}
+
+function saveDoor(){
+
 }
