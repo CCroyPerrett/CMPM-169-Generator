@@ -6,6 +6,7 @@ havelock = true;
 isdouble = true;
 handleshape = 2; handlewidth = 1; handleheight = 1;
 doorheight = 1; doorwidth = 1;
+numofhinges = 2;
 
 function setup() {
  // put setup code here
@@ -43,6 +44,13 @@ function drawDoor(issecond){
 
   //fill(100, 100, 100);
   //circle(100,100,50);
+
+  fill(handlecolor.r, handlecolor.g, handlecolor.b); //hinges
+  for(i = 0; i < numofhinges; i++){
+    translate(-52*doorwidth,-115*doorheight+300*i/(numofhinges/doorheight),0);
+    cylinder(4,20+60/numofhinges,6,2);
+    translate(52*doorwidth,115*doorheight-300*i/(numofhinges/doorheight),0);
+  }
 
   fill(handlecolor.r, handlecolor.g, handlecolor.b); //handle
   switch (handleshape){
@@ -156,6 +164,7 @@ function generateDoor(){
   handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
   handleshape = random([0,1,2]); handlewidth = random(0.7,1.5); handleheight = random(0.7,1.5);
   doorheight = random(0.7,1.3); random(0.7,1.3);
+  numofhinges = random([2,3,4,5,6]);
   if(random(0,2) < 1.3){
     havewindow = true; windowwidth = random(0.7,1.5); windowheight = random(0.7,1.5);
      windowshape = random([0,1]);
