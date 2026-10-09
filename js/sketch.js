@@ -4,7 +4,7 @@ havewindow = true; windowwidth = 1; windowheight = 1;  windowshape = 0;
 havecross = true;
 havelock = true;
 isdouble = true;
-handleshape = 0; handlewidth = 1; handleheight = 1;
+handleshape = 2; handlewidth = 1; handleheight = 1;
 //window;
 
 function setup() {
@@ -66,10 +66,9 @@ function drawDoor(issecond){
       box(12*handlewidth,25*handleheight,2);    
 
       translate(0,-8,-10); translate(0,0,-10); translate(0,0,30); translate(-30,0,-15);
-      console.log("circle handle");
       break;
 
-    case 1: //lever handle
+    case 1: //bar handle
       translate(30,0,15);
       cylinder(5*handlewidth,40*handleheight,6,2);
       translate(0,10,-15);
@@ -79,11 +78,24 @@ function drawDoor(issecond){
       translate(0,10,0);
       translate(0,0,-15);
       cylinder(5*handlewidth,40*handleheight,6,2);
-      
-      
-
       translate(-30,0,15);
-      console.log("cylinder handle");
+      break;
+
+    case 2: //lever handle
+      translate(20,0,15);
+      rotate(HALF_PI);
+      cylinder(4*handlewidth,30*handleheight,8,4);
+      translate(0,0,-30);
+      cylinder(4*handlewidth,30*handleheight,8,4);
+      translate(0,0,30);
+      rotate(-HALF_PI);
+      translate(12,0,-15);
+      box(8*handlewidth,8*handleheight,30,2);
+      translate(-12,0,15);
+
+
+
+      translate(-20,0,-15);
       break;
   }
 
@@ -154,9 +166,9 @@ function generateDoor(){
 
   bodycolor.r = random(0,255); bodycolor.g = random(0,255); bodycolor.b = random(0,255);
   handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
-  handleshape = random([0,1]); handlewidth = random(0.7,1.3); handleheight = random(0.7,1.3);
+  handleshape = random([0,1,2]); handlewidth = random(0.7,1.5); handleheight = random(0.7,1.5);
   if(random(0,2) < 1.3){
-    havewindow = true; windowwidth = random(0.7,1.3); windowheight = random(0.7,1.3);
+    havewindow = true; windowwidth = random(0.7,1.5); windowheight = random(0.7,1.5);
      windowshape = random([0,1]);
      
     if(random(0,2) < 1.3){
