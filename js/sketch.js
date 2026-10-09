@@ -4,6 +4,7 @@ havewindow = true; windowwidth = 1; windowheight = 1;  windowshape = 0;
 havecross = true;
 havelock = true;
 isdouble = true;
+handleshape = 0; handlewidth = 1; handleheight = 1;
 //window;
 
 function setup() {
@@ -53,16 +54,39 @@ function drawDoor(issecond){
   //circle(100,100,50);
 
   fill(handlecolor.r, handlecolor.g, handlecolor.b); //handle
-  translate(30,0,15);
-  sphere(10,6,6);
-  translate(0,0,-30);
-  sphere(10,6,6);
+  switch (handleshape){
+    case 0: //circular handle
+      translate(30,0,15);
+      sphere(10*handleheight,6,6);
+      translate(0,0,-30);
+      sphere(10*handleheight,6,6);
 
-  translate(0,8,10);    box(12,25,2);
-  translate(0,0,10);
-  box(12,25,2);    
+      translate(0,8,10);    box(12,25,2);
+      translate(0,0,10);
+      box(12*handlewidth,25*handleheight,2);    
 
-  translate(0,-8,-10); translate(0,0,-10); translate(0,0,30); translate(-30,0,-15);
+      translate(0,-8,-10); translate(0,0,-10); translate(0,0,30); translate(-30,0,-15);
+      console.log("circle handle");
+      break;
+
+    case 1: //lever handle
+      translate(30,0,15);
+      cylinder(5*handlewidth,40*handleheight,6,2);
+      translate(0,10,-15);
+      box(5*handlewidth,5*handleheight,30,2);
+      translate(0,-20,0);
+      box(5*handlewidth,5*handleheight,30,2);
+      translate(0,10,0);
+      translate(0,0,-15);
+      cylinder(5*handlewidth,40*handleheight,6,2);
+      
+      
+
+      translate(-30,0,15);
+      console.log("cylinder handle");
+      break;
+  }
+
 
   if(havelock && issecond == false){
      fill(handlecolor.r, handlecolor.g, handlecolor.b);
@@ -130,9 +154,11 @@ function generateDoor(){
 
   bodycolor.r = random(0,255); bodycolor.g = random(0,255); bodycolor.b = random(0,255);
   handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
+  handleshape = random([0,1]); handlewidth = random(0.7,1.3); handleheight = random(0.7,1.3);
   if(random(0,2) < 1.3){
     havewindow = true; windowwidth = random(0.7,1.3); windowheight = random(0.7,1.3);
      windowshape = random([0,1]);
+     
     if(random(0,2) < 1.3){
       havecross = true;
     }
