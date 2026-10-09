@@ -5,21 +5,12 @@ havecross = true;
 havelock = true;
 isdouble = true;
 handleshape = 2; handlewidth = 1; handleheight = 1;
-//window;
+doorheight = 1; doorwidth = 1;
 
 function setup() {
  // put setup code here
   textOutput();
-
   createCanvas(400, 500, WEBGL);
-
-  //angleMode(DEGREES);
-
-  //window = buildGeometry();
-    //let v0 = createVector(-40, 0, 0);
-    //let v1 = createVector(0, -40, 0);
-    //let v2 = createVector(40, 0, 0);
-    //window.vertices = [v0, v1, v2];
 
 }
 
@@ -47,7 +38,7 @@ function draw() {
 
 function drawDoor(issecond){
   fill(bodycolor.r, bodycolor.g, bodycolor.b); //body
-  box(100,300,10);
+  box(100*doorwidth,300*doorheight,10);
   //resetMatrix();
 
   //fill(100, 100, 100);
@@ -92,9 +83,6 @@ function drawDoor(issecond){
       translate(12,0,-15);
       box(8*handlewidth,8*handleheight,30,2);
       translate(-12,0,15);
-
-
-
       translate(-20,0,-15);
       break;
   }
@@ -134,7 +122,7 @@ function drawDoor(issecond){
         rectMode(CENTER);
         rect(0,-70,50*windowwidth,50*windowheight);
         translate(0,0,-15);  
-        circle(0,-70,50*windowwidth,50*windowheight);
+        rect(0,-70,50*windowwidth,50*windowheight);
         rectMode(CORNER);
         translate(0,0,15);  
         break;
@@ -167,6 +155,7 @@ function generateDoor(){
   bodycolor.r = random(0,255); bodycolor.g = random(0,255); bodycolor.b = random(0,255);
   handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
   handleshape = random([0,1,2]); handlewidth = random(0.7,1.5); handleheight = random(0.7,1.5);
+  doorheight = random(0.7,1.3); random(0.7,1.3);
   if(random(0,2) < 1.3){
     havewindow = true; windowwidth = random(0.7,1.5); windowheight = random(0.7,1.5);
      windowshape = random([0,1]);
@@ -195,7 +184,9 @@ function generateDoor(){
   else{
     havelock = false;
   }
-  /*quad(doorx, doory, doorx + 80, doory + 20, doorx+80, doory +170, doorx, doory + 150); //frame
-  quad(doorx, doory, doorx + 80, doory + 20, doorx + 100, doory+10, doorx+20, doory-10);
-  quad(doorx + 80, doory + 20, doorx + 100, doory+10, doorx + 100, doory+160, doorx + 80, doory + 170);*/
+}
+
+function setSeed(){
+  newSeed = document.getElementById("seedtext").value;
+  randomSeed(newSeed);
 }
