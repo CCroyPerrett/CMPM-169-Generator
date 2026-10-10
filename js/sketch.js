@@ -1,7 +1,7 @@
 bodycolor = {r: 255, g:0, b:100};
 handlecolor = {r: 150, g:75, b:0};
 havewindow = true; windowwidth = 1; windowheight = 1;  windowshape = 0;
-havecross = true;
+havecrossv = true; havecrossh = true;
 havelock = true;
 isdouble = true;
 handleshape = 2; handlewidth = 1; handleheight = 1;
@@ -25,13 +25,13 @@ function draw() {
     drawDoor(false);
   }
   else{
-    translate(-50,0,0);
+    translate(-50*doorwidth,0,0);
     drawDoor(true);
     scale(-1, 1);
-    translate(-100,0,0);
+    translate(-100*doorwidth,0,0);
     drawDoor(false);
     scale(-1, 1);
-    translate(150,0,3);
+    translate(150*doorwidth,0,3);
   }
   
   
@@ -138,16 +138,26 @@ function drawDoor(issecond){
   translate(0,0,-7.5);
 
   translate(0,0,10); //window cross
-  if(havewindow && havecross){
+  if(havewindow && (havecrossv || havecrossh)){
     rectMode(CENTER);
     noStroke();        
     fill(bodycolor.r, bodycolor.g, bodycolor.b);
-    rect(0,-70,10,70);
-    rect(0,-70,70,10);
+    if(havecrossv){
+      rect(0,-70,10,70);
+    }
+    if(havecrossh){
+      rect(0,-70,70,10);
+    }
+    //rect(0,-70,10,70);
+    //rect(0,-70,70,10);
 
     translate(0,0,-20);   
-    rect(0,-70,10,70);
-    rect(0,-70,70,10);
+    if(havecrossv){
+      rect(0,-70,10,70);
+    }
+    if(havecrossh){
+      rect(0,-70,70,10);
+    }
     stroke(10,10,10);   
     translate(0,0,20); 
     rectMode(CORNER);
@@ -161,7 +171,7 @@ function generateDoor(){
     randomSeed(bodyseed);
   }
   bodycolor.r = random(0,255); bodycolor.g = random(0,255); bodycolor.b = random(0,255);
-  doorheight = random(0.7,1.3); random(0.7,1.3);
+  doorheight = random(0.7,1.3); doorwidth = random(0.7,1.3);
   numofhinges = random([2,3,4,5,6]);
   if(random(0,2) < 1){
     isdouble = true;
@@ -174,7 +184,7 @@ function generateDoor(){
     randomSeed(handleseed);
   }
   handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
-  handleshape = random([0,1,2]); handlewidth = random(0.7,1.5); handleheight = random(0.7,1.5);
+  handleshape = random([0,1,2]); handlewidth = random(0.7,1.4); handleheight = random(0.7,1.5);
   if(random(0,2) < 1){
     havelock = true;
   }
@@ -185,15 +195,22 @@ function generateDoor(){
   if(newseed){
     randomSeed(windowseed);
   }
-  if(random(0,2) < 1.3){
+  if(random(0,2) < 1){
     havewindow = true; windowwidth = random(0.7,1.5); windowheight = random(0.7,1.5);
      windowshape = random([0,1]);
      
-    if(random(0,2) < 1.3){
-      havecross = true;
+    if(random(0,2) < 1.1){
+      havecrossv = true;
     }
     else{
-      havecross = false;
+      havecrossv = false;
+    }
+
+    if(random(0,2) < 1.1){
+      havecrossh = true;
+    }
+    else{
+      havecrossh = false;
     }
   }
   else{
