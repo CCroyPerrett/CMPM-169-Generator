@@ -4,7 +4,7 @@ havewindow = true; windowwidth = 1; windowheight = 1;  windowshape = 0;
 havecrossv = true; havecrossh = true;
 havelock = true;
 isdouble = true;
-handleshape = 2; handlewidth = 1; handleheight = 1;
+handleshape = 0; handlewidth = 1; handleheight = 1;
 doorheight = 1; doorwidth = 1;
 numofhinges = 2;
 bodyseed = 0; windowseed = 0; handleseed = 0; newseed = true;
@@ -53,7 +53,7 @@ function drawDoor(issecond){
   fill(handlecolor.r, handlecolor.g, handlecolor.b); //handle
   switch (handleshape){
     case 0: //circular handle
-      translate(30,0,15);
+      translate(25,0,15);
       sphere(10*handleheight,6,6);
       translate(0,0,-30);
       sphere(10*handleheight,6,6);
@@ -62,7 +62,7 @@ function drawDoor(issecond){
       translate(0,0,10);
       box(12*handlewidth,25*handleheight,2);    
 
-      translate(0,-8,-10); translate(0,0,-10); translate(0,0,30); translate(-30,0,-15);
+      translate(0,-8,-10); translate(0,0,-10); translate(0,0,30); translate(-25,0,-15);
       break;
 
     case 1: //bar handle
@@ -90,6 +90,13 @@ function drawDoor(issecond){
       box(8*handlewidth,8*handleheight,30,2);
       translate(-12,0,15);
       translate(-20,0,-15);
+      break;
+    case 3: //bar push handle, 
+      translate(0,0,12);
+      box(55*handlewidth, 12*handleheight, 10);
+      translate(0,0,-2);
+      box(65*handlewidth, 20*handleheight, 10);
+      translate(0,0,-8);
       break;
   }
 
@@ -148,8 +155,6 @@ function drawDoor(issecond){
     if(havecrossh){
       rect(0,-70,70,10);
     }
-    //rect(0,-70,10,70);
-    //rect(0,-70,70,10);
 
     translate(0,0,-20);   
     if(havecrossv){
@@ -184,7 +189,7 @@ function generateDoor(){
     randomSeed(handleseed);
   }
   handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
-  handleshape = random([0,1,2]); handlewidth = random(0.7,1.4); handleheight = random(0.7,1.5);
+  handleshape = random([0,1,2,3]); handlewidth = random(0.7,1.4); handleheight = random(0.7,1.5);
   if(random(0,2) < 1){
     havelock = true;
   }
