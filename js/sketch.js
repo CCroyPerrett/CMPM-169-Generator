@@ -44,9 +44,9 @@ function drawDoor(issecond){
 
   fill(handlecolor.r, handlecolor.g, handlecolor.b); //hinges
   for(i = 0; i < numofhinges; i++){
-    translate(-52*doorwidth,-115*doorheight+300*i/(numofhinges/doorheight),0);
+    translate(-52*doorwidth,-120*doorheight+300*i/(numofhinges/doorheight),0);
     cylinder(4,20+60/numofhinges,6,2);
-    translate(52*doorwidth,115*doorheight-300*i/(numofhinges/doorheight),0);
+    translate(52*doorwidth,120*doorheight-300*i/(numofhinges/doorheight),0);
   }
 
   fill(handlecolor.r, handlecolor.g, handlecolor.b); //handle
