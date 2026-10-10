@@ -7,6 +7,7 @@ isdouble = true;
 handleshape = 2; handlewidth = 1; handleheight = 1;
 doorheight = 1; doorwidth = 1;
 numofhinges = 2;
+bodyseed = 0; windowseed = 0; handleseed = 0; newseed = true;
 
 function setup() {
  // put setup code here
@@ -156,12 +157,34 @@ function drawDoor(issecond){
 }
 
 function generateDoor(){
-
+  if(newseed){
+    randomSeed(bodyseed);
+  }
   bodycolor.r = random(0,255); bodycolor.g = random(0,255); bodycolor.b = random(0,255);
-  handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
-  handleshape = random([0,1,2]); handlewidth = random(0.7,1.5); handleheight = random(0.7,1.5);
   doorheight = random(0.7,1.3); random(0.7,1.3);
   numofhinges = random([2,3,4,5,6]);
+  if(random(0,2) < 1){
+    isdouble = true;
+  }
+  else{
+    isdouble = false;
+  }
+
+  if(newseed){
+    randomSeed(handleseed);
+  }
+  handlecolor.r = random(0,255); handlecolor.g = random(0,255); handlecolor.b = random(0,255);
+  handleshape = random([0,1,2]); handlewidth = random(0.7,1.5); handleheight = random(0.7,1.5);
+  if(random(0,2) < 1){
+    havelock = true;
+  }
+  else{
+    havelock = false;
+  }
+  
+  if(newseed){
+    randomSeed(windowseed);
+  }
   if(random(0,2) < 1.3){
     havewindow = true; windowwidth = random(0.7,1.5); windowheight = random(0.7,1.5);
      windowshape = random([0,1]);
@@ -177,24 +200,15 @@ function generateDoor(){
     havewindow = false;
   }
 
-  if(random(0,2) < 1){
-    isdouble = true;
-  }
-  else{
-    isdouble = false;
-  }
-
-  if(random(0,2) < 1){
-    havelock = true;
-  }
-  else{
-    havelock = false;
-  }
+  newseed = false;
 }
 
 function setSeed(){
-  newSeed = document.getElementById("seedtext").value;
-  randomSeed(newSeed);
+  bodyseed = document.getElementById("bodyseed").value;
+  windowseed = document.getElementById("windowseed").value;
+  handleseed = document.getElementById("handleseed").value;
+  newseed = true;
+  //randomSeed(newSeed);
 }
 
 function saveDoor(){
